@@ -60,6 +60,7 @@ public enum SyntaxSpecifier: Hashable, Sendable, Codable {
 		case property
 		case parameter
 		case type
+        case typeSystem
 	}
 
 	public enum Punctuation: Hashable, Sendable, Codable, CaseIterable {
