@@ -14,6 +14,7 @@ public enum SyntaxSpecifier: Hashable, Sendable, Codable {
 	public enum Definition: Hashable, Sendable, Codable, CaseIterable {
 		case function
 		case method
+        case methodSystem
 		case macro
 		case constructor
 		case property
@@ -56,7 +57,8 @@ public enum SyntaxSpecifier: Hashable, Sendable, Codable {
 	public enum Identifier: Hashable, Sendable, Codable, CaseIterable {
 		case variable
 		case constant
-		case function
+        case function
+        case functionSystem
 		case property
 		case parameter
 		case type

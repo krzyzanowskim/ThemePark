@@ -195,10 +195,16 @@ extension XcodeTheme: Styling {
             return syntaxStyle(for: "xcode.syntax.identifier.type.system")
         case .syntax(.identifier(nil)):
             return syntaxStyle(for: "xcode.syntax.declaration.other")
-		case .syntax(.definition(.method)), .syntax(.definition(.function)):
-			return syntaxStyle(for: "xcode.syntax.identifier.function")
-		case .syntax(.definition(.constructor)), .syntax(.definition(.property)):
-			return syntaxStyle(for: "xcode.syntax.declaration.other")
+        case .syntax(.definition(.method)):
+            return syntaxStyle(for: "xcode.syntax.identifier.function")
+        case .syntax(.definition(.methodSystem)):
+            return syntaxStyle(for: "xcode.syntax.identifier.function.system")
+        case .syntax(.definition(.function)):
+            return syntaxStyle(for: "xcode.syntax.identifier.function")
+        case .syntax(.definition(.constructor)):
+            return syntaxStyle(for: "xcode.syntax.declaration.other")
+        case .syntax(.definition(.property)):
+            return syntaxStyle(for: "xcode.syntax.declaration.other")
 		case .syntax(.definition(.macro)):
 			return syntaxStyle(for: "xcode.syntax.identifier.macro")
         case .syntax(.definition(nil)):
