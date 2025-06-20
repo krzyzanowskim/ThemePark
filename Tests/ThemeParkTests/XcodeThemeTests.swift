@@ -10,6 +10,9 @@ final class XcodeThemeTests: XCTestCase {
 		XCTAssertEqual(theme.invisibles, "0.8 0.8 0.8 1")
 		XCTAssertEqual(theme.syntaxColors.count, 28)
 		XCTAssertEqual(theme.supportedVariants, [.init(colorScheme: .light)])
+		
+		// Verify that version is properly decoded when DVTFontAndColorVersion key is present
+		XCTAssertEqual(theme.version, 1)
 
 		XCTAssertEqual(theme.syntaxColors["xcode.syntax.attribute"], "0.505801 0.371396 0.012096 1")
 	}
@@ -39,5 +42,50 @@ final class XcodeThemeTests: XCTestCase {
 			theme.style(for: .gutter(.label)),
 			theme.style(for: .syntax(.text(nil)))
 		)
+	}
+
+	func testMissingDVTFontAndColorVersion() throws {
+		// Create a minimal theme plist without DVTFontAndColorVersion key
+		let themeWithoutVersionPlist = """
+		<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+		<plist version="1.0">
+		<dict>
+			<key>DVTSourceTextBackground</key>
+			<string>1 1 1 1</string>
+			<key>DVTSourceTextSelectionColor</key>
+			<string>0.642038 0.802669 0.999195 1</string>
+			<key>DVTMarkupTextNormalColor</key>
+			<string>0 0 0 1</string>
+			<key>DVTMarkupTextNormalFont</key>
+			<string>.AppleSystemUIFont - 10.0</string>
+			<key>DVTSourceTextInvisiblesColor</key>
+			<string>0.8 0.8 0.8 1</string>
+			<key>DVTSourceTextSyntaxColors</key>
+			<dict>
+				<key>xcode.syntax.plain</key>
+				<string>0 0 0 0.85</string>
+			</dict>
+			<key>DVTSourceTextSyntaxFonts</key>
+			<dict>
+				<key>xcode.syntax.plain</key>
+				<string>SFMono-Regular - 12.0</string>
+			</dict>
+		</dict>
+		</plist>
+		"""
+		
+		let data = themeWithoutVersionPlist.data(using: .utf8)!
+		let theme = try XcodeTheme(with: data)
+		
+		// Verify that version property is nil when DVTFontAndColorVersion key is missing
+		XCTAssertNil(theme.version, "Version should be nil when DVTFontAndColorVersion key is missing from theme file")
+		
+		// Verify that other properties are still properly decoded
+		XCTAssertEqual(theme.sourceTextBackground, "1 1 1 1")
+		XCTAssertEqual(theme.selection, "0.642038 0.802669 0.999195 1")
+		XCTAssertEqual(theme.invisibles, "0.8 0.8 0.8 1")
+		XCTAssertEqual(theme.syntaxColors["xcode.syntax.plain"], "0 0 0 0.85")
+		XCTAssertEqual(theme.syntaxFonts["xcode.syntax.plain"], "SFMono-Regular - 12.0")
 	}
 }

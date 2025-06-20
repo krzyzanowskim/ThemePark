@@ -1,7 +1,7 @@
 import Foundation
 
 public struct XcodeTheme: Codable, Hashable, Sendable {
-	public let version: Int
+	public let version: Int?
 	public let sourceTextBackground: String
 	public let selection: String
 	public let markupTextNormalColor: String
