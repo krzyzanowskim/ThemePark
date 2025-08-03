@@ -177,7 +177,7 @@ extension XcodeTheme: Styling {
 			return syntaxStyle(for: "xcode.syntax.comment")
 		case .syntax(.literal(.string(.uri))):
 			return syntaxStyle(for: "xcode.syntax.url")
-		case .syntax(.literal(.string(_))):
+        case .syntax(.literal(.string(_))):
 			return syntaxStyle(for: "xcode.syntax.string")
 		case .syntax(.literal(.number(_))):
 			return syntaxStyle(for: "xcode.syntax.number")
