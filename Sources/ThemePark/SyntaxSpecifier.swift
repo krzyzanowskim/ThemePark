@@ -16,6 +16,7 @@ public enum SyntaxSpecifier: Hashable, Sendable, Codable {
 		case method
         case methodSystem
 		case macro
+        case macroSystem
 		case constructor
 		case property
 	}
@@ -63,6 +64,7 @@ public enum SyntaxSpecifier: Hashable, Sendable, Codable {
 		case parameter
 		case type
         case typeSystem
+        case variableSystem
 	}
 
 	public enum Punctuation: Hashable, Sendable, Codable, CaseIterable {
@@ -142,7 +144,8 @@ extension SyntaxSpecifier {
 		"text.strong": .text(.strong),
 		"text.uri": .literal(.string(.uri)),
 		"type": .identifier(.type),
-		"variable": .identifier(.variable),
+        "variable": .identifier(.variable),
+        "variable.member": .identifier(.property),
 		"variable.builtin": .identifier(.variable),
 	]
 }

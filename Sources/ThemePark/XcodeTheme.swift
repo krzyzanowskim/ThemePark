@@ -189,6 +189,10 @@ extension XcodeTheme: Styling {
 			return syntaxStyle(for: "xcode.syntax.identifier.variable")
 		case .syntax(.identifier(.variable)):
 			return syntaxStyle(for: "xcode.syntax.identifier.variable")
+        case .syntax(.identifier(.constant)):
+            return syntaxStyle(for: "xcode.syntax.identifier.constant")
+        case .syntax(.identifier(.variableSystem)):
+            return syntaxStyle(for: "xcode.syntax.identifier.variable.system")
         case .syntax(.identifier(.type)):
             return syntaxStyle(for: "xcode.syntax.identifier.type")
         case .syntax(.identifier(.typeSystem)):
@@ -206,8 +210,12 @@ extension XcodeTheme: Styling {
         case .syntax(.definition(.property)):
             return syntaxStyle(for: "xcode.syntax.declaration.other")
 		case .syntax(.definition(.macro)):
-			return syntaxStyle(for: "xcode.syntax.identifier.macro")
+            return syntaxStyle(for: "xcode.syntax.identifier.macro")
+        case .syntax(.definition(.macroSystem)):
+            return syntaxStyle(for: "xcode.syntax.identifier.macro.system")
         case .syntax(.definition(nil)):
+            return syntaxStyle(for: "xcode.syntax.declaration.other")
+        case .syntax(.operator(.call)):
             return syntaxStyle(for: "xcode.syntax.declaration.other")
 		case .syntax(.invisible):
 			let color = PlatformColor(componentsString: invisibles) ?? fallbackForegroundColor
